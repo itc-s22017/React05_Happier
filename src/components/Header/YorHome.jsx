@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function YorHome({val,linkTo}) {
     return (
-        <Link to={linkTo} style={{ textDecoration: "none", color: "black" }}>
+        <Link to={linkTo} style={{ textDecoration: "none", color: "black" , margin: "auto"}}>
             <h4 className='Happier'>
                 {val}
             </h4>
