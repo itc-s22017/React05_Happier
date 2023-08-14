@@ -3,7 +3,7 @@ import React from 'react'
 function Home() {
   return (
     <div>
-        <button class="favorite styled" type="button">Add to favorites</button>
+         <Button variant="primary">Primary</Button>
     </div>
   )
 }
