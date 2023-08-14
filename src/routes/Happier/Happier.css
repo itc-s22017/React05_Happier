@@ -1,3 +1,10 @@
+body {
+    /* background-color: #fff; */
+}
+
+.tweetButton {
+    background-color: #fff !important;
+}
 .Tweet {
     width: 500px;
     padding-bottom: 15px;

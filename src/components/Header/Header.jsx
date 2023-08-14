@@ -1,6 +1,5 @@
 import React from 'react'
 import "./Header.css"
-import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import YorHome from './YorHome'
 import X from '../../assets/XTime.png'
