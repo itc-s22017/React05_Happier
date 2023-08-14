@@ -1,0 +1,26 @@
+.Tweet {
+    width: 500px;
+    padding-bottom: 15px;
+    border-bottom: 9px solid #ddd;
+    padding-right: 10px;
+    margin: auto;
+}
+
+.Tweet>form {
+    display: flex;
+    flex-direction: column;
+}
+
+.Tweet--input {
+    display: flex;
+    padding: 20px 0;
+}
+
+.Tweet--input > input { 
+    flex: 1;
+    font-size: 20px;
+    margin-left: 20px;
+    border: none;
+    outline: none;
+}
+
