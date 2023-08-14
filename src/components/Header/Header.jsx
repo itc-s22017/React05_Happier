@@ -3,22 +3,23 @@ import "./Header.css"
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import YorHome from './YorHome'
+import X from '../../assets/XTime.png'
 
 function Header() {
     const pathname = useLocation().pathname
     const val = {
-        val: "Y",
+        val: "幸せをつぶやこう",
         linkTo: "Happier"
     }
     const val2 = {
-        val: "Home",
+        val: "オヤジギャグ",
         linkTo: "/"
     }
 
     return (
         <div className='header'>
             <div className="headerWrapper">
-                <h1 className='team'>X Team</h1>
+                <img className='logo' src={X} />
                 {pathname === "/" ?
                     <YorHome {...val} /> : <YorHome {...val2} />
                 }
