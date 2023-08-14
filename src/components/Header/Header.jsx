@@ -7,11 +7,11 @@ import YorHome from './YorHome'
 function Header() {
     const pathname = useLocation().pathname
     const val = {
-        val: "Y",
+        val: "幸せをつぶやこう",
         linkTo: "Happier"
     }
     const val2 = {
-        val: "Home",
+        val: "オヤジギャグ",
         linkTo: "/"
     }
 
