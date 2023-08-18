@@ -1,13 +1,22 @@
-import React from 'react'
-import { useRef } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../context/AuthContext';
 
-function Signup() {
+
+const Signup = () => {
+    const { signup } = useAuthContext();
     const nameRef = useRef(null);
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
 
-    const handleSubmit = () => { }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        signup({
+            name:nameRef.current.value,
+            email:emailRef.current.value,
+            password:passwordRef.current.value
+        })
+    };
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <h1>ユーザ登録</h1>
@@ -34,10 +43,11 @@ function Signup() {
                 </div>
             </form>
             <div>
-                ログインは<Link to="/Happier/login">こちら</Link>
+                ログインは<Link to="/login">こちら</Link>
             </div>
         </div>
-    )
-}
+    );
+};
+
 
 export default Signup
