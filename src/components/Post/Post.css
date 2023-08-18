@@ -3,14 +3,13 @@
     border: 3px solid #ddd;
     display: flex;
     flex-direction: column;
-    margin: auto;
-    margin-top:20px;
+    margin:20px auto;
     background-color: #fff;
 }
 
 .avatar{
     margin-right: 5px;
-
+    cursor: pointer;
 }
 
 .username {
@@ -25,4 +24,9 @@
     display: flex;
     align-items: center;
     padding: 10px;
+}
+
+.dataTime {
+    text-align: right;
+    margin-right: 10px;
 }
