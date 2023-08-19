@@ -6,7 +6,6 @@ import Happier from './routes/Happier/Happier';
 import Login from './routes/Login/Login';
 import Signup from './routes/Signup/Signup';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useAuthContext } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Profile from './routes/Profile/Profile';
