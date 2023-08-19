@@ -42,9 +42,7 @@ const useAuth = () => {
         setUser(null);
         const refresh_token = localStorage.getItem('refresh_token');
         if (refresh_token) {
-            await axios.delete('/auth/remove_token', {
-                refresh_token,
-            });
+            await axios.delete(`/auth/remove_token/${refresh_token}`);
         }
         localStorage.removeItem('token');
         localStorage.removeItem('refresh_token');
