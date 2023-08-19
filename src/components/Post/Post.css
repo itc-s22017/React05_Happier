@@ -43,3 +43,10 @@
     font-size: 12px;
     margin-right: 5px;
 }
+
+.deleteBtn {
+    border: none;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: bold;
+}

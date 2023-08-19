@@ -7,7 +7,7 @@ import { useAuthContext } from '../../context/AuthContext'
 import LogoutIcon from '@mui/icons-material/Logout';
 import axios from "../../utils/axios"
 
-function Happier() {
+function Happier({ username }) {
   const { logout } = useAuthContext()
   const { user } = useAuthContext()
   const [posts, setPosts] = useState([])
@@ -15,7 +15,10 @@ function Happier() {
 
   const getPosts = useCallback(async () => {
     try {
-      const response = await axios.get("/post/getAll")
+      const response = username ?
+        await axios.get(`/post/profile/${username}`)
+        :
+        await axios.get("/post/getAll")
       setPosts(response.data.sort((post1, post2) => {
         return new Date(post2.createdAt) - new Date(post1.createdAt)
       }))
@@ -26,10 +29,13 @@ function Happier() {
 
   useEffect(() => {
     getPosts()
-  }, [])
+  }, [username])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (contentRef.current.value === "") {
+      return
+    }
     try {
       await axios.post("/post", {
         username: user.name,
@@ -46,19 +52,21 @@ function Happier() {
   return (
     <>
       <LogoutIcon onClick={logout} />
-      <div className="Tweet">
-        <form onSubmit={handleSubmit}>
-          <div className="Tweet--input">
-            <Avatar />
-            <input
-              type="text"
-              placeholder='身近にある小さな幸せは？'
-              ref={contentRef}
-            />
-          </div>
-          <Button className='tweetButton' type='submit'>投稿する</Button>
-        </form>
-      </div>
+      {!username && (
+        <div className="Tweet">
+          <form onSubmit={handleSubmit}>
+            <div className="Tweet--input">
+              <Avatar />
+              <input
+                type="text"
+                placeholder='身近にある小さな幸せは？'
+                ref={contentRef}
+              />
+            </div>
+            <Button className='tweetButton' type='submit'>投稿する</Button>
+          </form>
+        </div>
+      )}
       {posts.map(post => (
         <Post post={post} key={post._id} />
       ))}

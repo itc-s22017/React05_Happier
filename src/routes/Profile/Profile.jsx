@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from "../../utils/axios"
-import Post from '../../components/Post/Post'
 import { Avatar } from '@mui/material'
-
+import Happier from '../Happier/Happier'
+import "./Profile.css"
 
 function Profile() {
   const username = useParams().username
-  const [posts, setPosts] = useState([])
+  const [currentUser, setCurrentUser] = useState()
 
   useEffect(() => {
     const fetch = async () => {
       try {
-        const res = await axios.get(`/post/profile/${username}`)
-        console.log(res.data)
-        setPosts(res.data.sort((post1, post2) => {
-          return new Date(post2.createdAt) - new Date(post1.createdAt)
-        }))
+        const res = await axios.get(`/users/${username}`)
+        setCurrentUser(res.data.name)
       } catch (e) {
-        alert("CAN NOT FIND")
+        console.log("error profile page")
       }
     }
     fetch()
@@ -27,11 +24,11 @@ function Profile() {
 
   return (
     <>
-    <Avatar /> 
-    <span>u</span>
-      {posts.map(post => (
-        <Post post={post} key={post._id} />
-      ))}
+      <div className="profile">
+        <Avatar className='avatar2'/>
+        <span className='username'>{currentUser} さんのプロフィール</span>
+      </div>
+      <Happier username={username} />
     </>
   )
 }

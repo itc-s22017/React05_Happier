@@ -60,7 +60,6 @@ const useAuth = () => {
             const response = await axios.get('/auth/user');
             const user = response.data.user;
             setUser(user);
-            console.log(user)
         } catch (error) {
             console.log("JWTトークンの期限が切れてるよおおおお！");
             logout()
