@@ -14,13 +14,13 @@ function Post({ post }) {
   return (
     <div className="post">
       <div className="wrap">
-      <div className="iconAndName">
-        <Avatar className='avatar' onClick={handleNavigate}/>
-        <span className='username'>{post.username}</span>
-      </div>
-      <div>
-        <span className='minutes'>{format(post.createdAt)}</span>
-      </div>
+        <div className="iconAndName">
+          <Avatar className='avatar' onClick={handleNavigate} />
+          <span className='username'>{post.username}</span>
+        </div>
+        <div>
+          <span className='minutes'>{format(post.createdAt)}</span>
+        </div>
       </div>
       <div className="content">
         <p>{post.content}</p>
