@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useAuthContext } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Profile from './routes/Profile/Profile';
+import Timeline from './routes/Happier/Timeline';
 
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
         <Route path='/Happier'
           element={
             <ProtectedRoute>
-              <Happier />
+              <Timeline />
             </ProtectedRoute>
           }>
         </Route>
