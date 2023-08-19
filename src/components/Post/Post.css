@@ -5,6 +5,7 @@
     flex-direction: column;
     margin:20px auto;
     background-color: #fff;
+    word-wrap: break-word;
 }
 
 .avatar{
@@ -29,4 +30,16 @@
 .dataTime {
     text-align: right;
     margin-right: 10px;
+}
+
+.wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.minutes {
+    color:#969696;
+    font-size: 12px;
+    margin-right: 5px;
 }

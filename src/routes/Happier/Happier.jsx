@@ -16,8 +16,9 @@ function Happier() {
   const getPosts = useCallback(async () => {
     try {
       const response = await axios.get("/post/getAll")
-      setPosts(response.data)
-      console.log(response.data)
+      setPosts(response.data.sort((post1, post2) => {
+        return new Date(post2.createdAt) - new Date(post1.createdAt)
+      }))
     } catch (e) {
       console.log(e)
     }
@@ -25,7 +26,6 @@ function Happier() {
 
   useEffect(() => {
     getPosts()
-    console.log(user.name)
   }, [])
 
   const handleSubmit = async (e) => {

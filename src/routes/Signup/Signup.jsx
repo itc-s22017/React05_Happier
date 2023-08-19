@@ -43,7 +43,7 @@ const Signup = () => {
                 </div>
             </form>
             <div>
-                ログインは<Link to="/login">こちら</Link>
+                ログインは<Link to="/Happier/login">こちら</Link>
             </div>
         </div>
     );
