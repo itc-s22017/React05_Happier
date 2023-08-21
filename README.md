@@ -4,11 +4,11 @@ VirtualBox
 Vagrant  
 Visual Studio Code  
 
-仮想
-Box ubuntu/
-Ubunt 
-SyncedFolder ホスト「./data」 ⇔ 仮想「/home/vagrant/data/」
-Git
-Node.js
-npm
+仮想  
+Box ubuntu/  
+Ubunt   
+SyncedFolder ホスト「./data」 ⇔ 仮想「/home/vagrant/data/」  
+Git  
+Node.js  
+npm  
 
