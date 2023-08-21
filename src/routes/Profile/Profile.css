@@ -1,0 +1,22 @@
+.profile {
+    width: 500px;
+    padding-bottom: 15px;
+    padding-right: 10px;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    /* border: 1px solid #ddd; */
+    padding: 10px;
+}
+
+.avatar2 {
+    width: 70px !important;
+    height: 70px !important;
+    object-fit: cover !important;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 25px;
+    margin-left: 30px;
+}
