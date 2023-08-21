@@ -1,8 +1,8 @@
-ホストOS 
-Ubunt 22.04 LTS
-VirtualBox 
-Vagrant 
-Visual Studio Code 
+ホストOS  
+Ubunt 22.04 LTS  
+VirtualBox  
+Vagrant  
+Visual Studio Code  
 
 仮想
 Box ubuntu/
