@@ -13,11 +13,11 @@ function Post({ post }) {
   const navigate = useNavigate()
   const { user } = useAuthContext()
 
-  const [like, setCountLike] = useState(false)
+  const [like, setCountLike] = useState(post.likes.length)
+  const [isLiked, setIsLiked] = useState(false)
 
   const handleNavigate = () => {
     navigate(`/Happier/${post.userId}`)
-    // console.log(post._id)
   }
 
   const handleDelete = async (e) => {
@@ -34,8 +34,22 @@ function Post({ post }) {
     }
   }
 
-  const handleLike = () => {
-    setCountLike(prev => !prev)
+  const handleLike = async (e) => {
+    e.preventDefault()
+    try {
+      // これ↓きたないからいずれまとめたい　今はめんどう
+      await axios.put(`/post/like/${post._id}`, {
+        userId: user._id
+      })
+      const getCountLikes = await axios.get(`/post/countLikes/${post._id}`, {
+        userId: user._id
+      })
+      setCountLike(getCountLikes.data.length)
+      setIsLiked(getCountLikes.data.isLiked) // なぜかfalseしか帰ってこない　後回し
+      // console.log(getCountLikes.data)
+    } catch (e) {
+      console.log("いいねリクエスト失敗")
+    }
   }
 
   return (
@@ -53,14 +67,14 @@ function Post({ post }) {
         <p>{post.content}</p>
       </div>
       <div className="like" onClick={handleLike}>
-        {!like ?
+        {!isLiked ?
           <FavoriteBorderIcon className='heart' />
           :
           <FavoriteIcon className='heart' />
         }
-        {post.likes.length}
+        {like} 人がいいねしました
       </div>
-      {user.name === post.username && (
+      {user._id === post.userId && (
         <button className='deleteBtn' onClick={handleDelete}>Delete</button>
       )}
     </div>
