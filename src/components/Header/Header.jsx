@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Header.css"
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import YorHome from './YorHome'
 import X from '../../assets/XTime.png'
 
@@ -18,7 +18,9 @@ function Header() {
     return (
         <div className='header'>
             <div className="headerWrapper">
-                <img className='logo' src={X} />
+                <Link to="/Happier">
+                    <img className='logo' src={X} />
+                </Link>
                 {pathname === "/" ?
                     <YorHome {...val} /> : <YorHome {...val2} />
                 }

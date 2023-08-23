@@ -7,7 +7,7 @@ import { useAuthContext } from '../../context/AuthContext'
 import LogoutIcon from '@mui/icons-material/Logout';
 import axios from "../../utils/axios"
 
-function Happier({ username }) {
+function Happier({ id }) {
   const { logout } = useAuthContext()
   const { user } = useAuthContext()
   const [posts, setPosts] = useState([])
@@ -15,8 +15,8 @@ function Happier({ username }) {
 
   const getPosts = useCallback(async () => {
     try {
-      const response = username ?
-        await axios.get(`/post/profile/${username}`)
+      const response = id ?
+        await axios.get(`/post/profile/${id}`)
         :
         await axios.get("/post/getAll")
       setPosts(response.data.sort((post1, post2) => {
@@ -29,7 +29,7 @@ function Happier({ username }) {
 
   useEffect(() => {
     getPosts()
-  }, [username])
+  }, [id])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -39,8 +39,8 @@ function Happier({ username }) {
     try {
       await axios.post("/post", {
         username: user.name,
-        email: user.email,
-        content: contentRef.current.value
+        content: contentRef.current.value,
+        userId:user._id
       })
       window.location.reload()
     } catch (e) {
@@ -52,7 +52,7 @@ function Happier({ username }) {
   return (
     <>
       <LogoutIcon onClick={logout} />
-      {!username && (
+      {!id && (
         <div className="Tweet">
           <form onSubmit={handleSubmit}>
             <div className="Tweet--input">

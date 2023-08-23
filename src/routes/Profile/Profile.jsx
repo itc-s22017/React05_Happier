@@ -6,14 +6,14 @@ import Happier from '../Happier/Happier'
 import "./Profile.css"
 
 function Profile() {
-  const username = useParams().username
-  const [currentUser, setCurrentUser] = useState()
+  const id = useParams().id
+  const [currentUser, setCurrentUser] = useState({})
 
   useEffect(() => {
     const fetch = async () => {
       try {
-        const res = await axios.get(`/users/${username}`)
-        setCurrentUser(res.data.name)
+        const res = await axios.get(`/users/${id}`)
+        setCurrentUser(res.data)
       } catch (e) {
         console.log("error profile page")
       }
@@ -26,9 +26,9 @@ function Profile() {
     <>
       <div className="profile">
         <Avatar className='avatar2'/>
-        <span className='username'>{currentUser} さんのプロフィール</span>
+        <span className='username'>{currentUser.name}さんのプロフィール</span>
       </div>
-      <Happier username={username} />
+      <Happier id={id} />
     </>
   )
 }

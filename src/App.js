@@ -27,7 +27,7 @@ function App() {
         </Route>
         <Route path='/Happier/login' element={<Login />}></Route>
         <Route path='/Happier/signup' element={<Signup />}></Route>
-        <Route path='/Happier/:username' element={<Profile />}></Route>
+        <Route path='/Happier/:id' element={<Profile />}></Route>
 
       </Routes>
     </>
