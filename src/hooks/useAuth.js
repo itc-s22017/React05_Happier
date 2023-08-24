@@ -32,7 +32,7 @@ const useAuth = () => {
             await getUser();
             navigate('/Happier');
         } catch (error) {
-            console.log(error);
+            window.alert("Id or Password Incorrect")
         }
     };
 

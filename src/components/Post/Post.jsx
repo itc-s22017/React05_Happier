@@ -7,6 +7,7 @@ import { useAuthContext } from '../../context/AuthContext';
 import axios from "../../utils/axios"
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import Modal from '../Modal/Modal';
 
 
 function Post({ post }) {
@@ -15,6 +16,7 @@ function Post({ post }) {
 
   const [like, setCountLike] = useState(post.likes.length)
   const [isLiked, setIsLiked] = useState(false)
+  const [showModal, setShowModal] = useState(false);
 
   const handleNavigate = () => {
     navigate(`/Happier/${post.userId}`)
@@ -52,6 +54,10 @@ function Post({ post }) {
     }
   }
 
+  const flag = () => {
+    setShowModal(true)
+  }
+
   return (
     <div className="post">
       <div className="wrap">
@@ -66,17 +72,23 @@ function Post({ post }) {
       <div className="content">
         <p>{post.content}</p>
       </div>
-      <div className="like" onClick={handleLike}>
-        {!isLiked ?
-          <FavoriteBorderIcon className='heart' />
-          :
-          <FavoriteIcon className='heart' />
-        }
-        {like} 人がいいねしました
+      <div className="wrap">
+        <div className="like" onClick={handleLike}>
+          {!isLiked ?
+            <FavoriteBorderIcon className='heart' />
+            :
+            <FavoriteIcon className='heart' />
+          }
+          {like}
+        </div>
+        <p onClick={flag}>人がいいねしました</p>
       </div>
       {user._id === post.userId && (
         <button className='deleteBtn' onClick={handleDelete}>Delete</button>
       )}
+      { showModal ?
+        <Modal showFlag={showModal} setShowModal={setShowModal} postId={post._id} /> : ""
+      }
     </div>
   )
 }
