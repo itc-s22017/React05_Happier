@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 500px;
+    margin: auto;
+    height:auto;
+    /* border:1px solid #ddd; */
+}
+
+.reply {
+    display: flex;
+    align-items: center;
+    /* width: 300px; */
+}
+
+.input {
+    border: none;
+    padding: 5px;
+    display: block;
+    width: 100%;
+    outline: none;
+}

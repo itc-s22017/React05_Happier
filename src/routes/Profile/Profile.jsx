@@ -19,7 +19,7 @@ function Profile() {
       }
     }
     fetch()
-  }, [])
+  }, [id])
 
 
   return (
