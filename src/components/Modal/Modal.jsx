@@ -43,18 +43,27 @@ function Modal({ showFlag, setShowModal, postId }) {
     };
 
     const btn = {
-        margin: "auto"
+        // margin: "auto"
+        margin:0,
+        padding:0,
+        border:"none",
+        fontSize:"20px",
+        backgroundColor:"none",
+        cursor:"pointer",
+        fontWeight:"bold",
     }
+
+    
     return (
         <>
             {showFlag ? (
                 <div id="overlay" style={overlay}>
                     <div id="modalContent" style={modalContent}>
+                        <button onClick={closeModal} style={btn}>☓</button>
                         {users.length !== 0 && users.map(user => (
-                            <User key={user._id} user={user} />
+                            <User key={user._id} user={user} length={users.length}/>
                         ))}
                         {users.length === 0 && <p style={{fontWeight:"bold"}}>いいねしている人がいません</p>}
-                        <button onClick={closeModal} style={btn}>Close</button>
                     </div>
                 </div>
             ) : (

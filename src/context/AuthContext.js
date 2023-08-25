@@ -9,7 +9,7 @@ export function useAuthContext() {
 }
 
 export function AuthProvider({ children }) {
-    const { user, login, signup, setUser, getUser,logout } = useAuth();
+    const { user, login, signup, setUser, getUser, logout } = useAuth();
 
     useEffect(() => {
         const test = async () => {
@@ -30,7 +30,8 @@ export function AuthProvider({ children }) {
         setUser,
         login,
         signup,
-        logout
+        logout,
+
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

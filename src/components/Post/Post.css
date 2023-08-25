@@ -3,13 +3,28 @@
     border: 3px solid #ff00cce5;
     display: flex;
     flex-direction: column;
-    margin:20px auto;
+    margin: 20px auto;
     background-color: #fff;
     word-wrap: break-word;
     border-radius: 10px;
+    background-image: url("../../../src/assets/smile.png");
+    background-size: cover;
 }
 
-.avatar{
+.post2 {
+    width: 500px;
+    border: 3px solid #ff00cce5;
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+    background-color: #fff;
+    word-wrap: break-word;
+    border-radius: 10px;
+    background-image: url("../../../src/assets/smile_reversed.png");
+    background-size: 700px;
+}
+
+.avatar {
     /* margin-right: 5px; */
     cursor: pointer;
 }
@@ -33,14 +48,9 @@
     margin-right: 10px;
 }
 
-.wrap {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 
 .minutes {
-    color:#969696;
+    color: #969696;
     font-size: 12px;
     margin-right: 5px;
 }
@@ -53,7 +63,7 @@
     border-radius: 10px;
 }
 
-.deleteBtn:hover{
+.deleteBtn:hover {
     background-color: #ddd;
     cursor: pointer;
 }
@@ -61,7 +71,7 @@
 .like {
     display: flex;
     align-items: center;
-    padding:10px;
+    padding: 10px;
 }
 
 .heart {
@@ -71,5 +81,20 @@
 .wrap {
     display: flex;
     align-items: center;
-    justify-content:left
+    justify-content: left;
+}
+
+.likesHowMany {
+    text-decoration: underline;
+}
+
+.wrapwrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.commentIcon {
+    margin-right: 10px;
+    cursor: pointer;
 }

@@ -7,29 +7,50 @@ import { useAuthContext } from '../../context/AuthContext'
 import LogoutIcon from '@mui/icons-material/Logout';
 import axios from "../../utils/axios"
 
-function Happier({ id }) {
+function Happier({ id, reply }) {
   const { logout } = useAuthContext()
   const { user } = useAuthContext()
   const [posts, setPosts] = useState([])
   const contentRef = useRef()
 
-  const getPosts = useCallback(async () => {
+  const set = (response) => setPosts(response.data.sort((post1, post2) => {
+    return new Date(post2.createdAt) - new Date(post1.createdAt)
+  }).filter(data => data.reply === false))
+
+  // const set = (response) => setPosts(response.data.filter(data => {
+  //   return data.content.includes("a")
+  // }))
+
+  const getPosts = async () => {
     try {
-      const response = id ?
-        await axios.get(`/post/profile/${id}`)
-        :
-        await axios.get("/post/getAll")
-      setPosts(response.data.sort((post1, post2) => {
-        return new Date(post2.createdAt) - new Date(post1.createdAt)
-      }))
+      // const response = id ?
+      //   await axios.get(`/post/profile/${id}`)
+      //   :
+      //   await axios.get("/post/getAll")
+      // setPosts(response.data.sort((post1, post2) => {
+      //   return new Date(post2.createdAt) - new Date(post1.createdAt)
+      // }))
+      if (id) {
+        //プロフ用
+        const response = await axios.get(`/post/profile/${id}`)
+        set(response)
+      } else if (reply) {
+        // reply用
+        const response = await axios.get(`/post/getPostFromParam/${reply}`)
+        setPosts([response.data])
+      } else {
+        //home用
+        const response = await axios.get("/post/getAll")
+        set(response)
+      }
     } catch (e) {
       console.log(e)
     }
-  }, [])
+  }
 
   useEffect(() => {
     getPosts()
-  }, [id])
+  }, [id, reply])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -40,7 +61,7 @@ function Happier({ id }) {
       await axios.post("/post", {
         username: user.name,
         content: contentRef.current.value,
-        userId:user._id
+        userId: user._id
       })
       window.location.reload()
     } catch (e) {
@@ -52,7 +73,7 @@ function Happier({ id }) {
   return (
     <>
       <LogoutIcon onClick={logout} />
-      {!id && (
+      {!id && !reply && (
         <div className="Tweet">
           <form onSubmit={handleSubmit}>
             <div className="Tweet--input">
