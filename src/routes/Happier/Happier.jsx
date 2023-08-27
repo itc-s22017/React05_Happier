@@ -17,19 +17,8 @@ function Happier({ id, reply }) {
     return new Date(post2.createdAt) - new Date(post1.createdAt)
   }).filter(data => data.reply === false))
 
-  // const set = (response) => setPosts(response.data.filter(data => {
-  //   return data.content.includes("a")
-  // }))
-
   const getPosts = async () => {
     try {
-      // const response = id ?
-      //   await axios.get(`/post/profile/${id}`)
-      //   :
-      //   await axios.get("/post/getAll")
-      // setPosts(response.data.sort((post1, post2) => {
-      //   return new Date(post2.createdAt) - new Date(post1.createdAt)
-      // }))
       if (id) {
         //プロフ用
         const response = await axios.get(`/post/profile/${id}`)

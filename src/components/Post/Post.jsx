@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./Post.css"
 import { Avatar } from '@mui/material'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { format } from 'timeago.js';
 import { useAuthContext } from '../../context/AuthContext';
 import axios from "../../utils/axios"
@@ -14,7 +14,6 @@ import AddCommentIcon from '@mui/icons-material/AddComment';
 function Post({ post }) {
   const navigate = useNavigate()
   const { user } = useAuthContext()
-  const path = useParams()
 
   const [like, setCountLike] = useState(post.likes.length)
   const [isLiked, setIsLiked] = useState(false)
@@ -26,7 +25,6 @@ function Post({ post }) {
     const fetch = async () => {
       const res = await axios.get(`/post/getNumberOfComment/${post._id}`)
       setNumberOfComment(res.data)
-      console.log(path)
     }
     fetch()
   }, [])

@@ -11,7 +11,7 @@ function User({ user, length }) {
         <Avatar className='avatarUser' />
         <Link to={`/Happier/${user?._id}`} style={{ textDecoration: "none", color: "black" }}>
           <span className='usernameUser'>{user.name}</span>
-          {length >= 2 ? (
+          {length && length >= 2 ? (
             <hr style={{ width: "100%" }} />
           ) :
             ""
