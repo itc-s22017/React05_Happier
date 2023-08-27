@@ -24,7 +24,7 @@ function Reply() {
     fetch()
   }, [id])
 
-  const handleReply = useCallback(async (e) => {
+  const handleReply = async (e) => {
     e.preventDefault()
     if (contentRef.current.value === "") {
       return
@@ -41,9 +41,9 @@ function Reply() {
       })
       window.location.reload()
     } catch (e) {
-      console.log(e)
+      console.log("DO LOGIN!")
     }
-  }, [id])
+  }
   return (
     <>
       <Happier reply={id} />
