@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from "../../utils/axios"
-import { Avatar } from '@mui/material'
+import { Avatar, Button, ButtonBase } from '@mui/material'
 import Happier from '../Happier/Happier'
 import "./Profile.css"
 
@@ -24,9 +24,15 @@ function Profile() {
 
   return (
     <>
-      <div className="profile">
-        <Avatar className='avatar2'/>
-        <span className='username'>{currentUser.name}さんのプロフィール</span>
+      <div className="container">
+        <div className="profile">
+          <Avatar className='avatar2' />
+          <span className='username'>{currentUser.name}さんのプロフィール</span>
+        </div>
+        <div className="follow">
+          <Button className="fBtn">フォロー中</Button>
+          <Button className='fBtn'>フォロワー</Button>
+        </div>
       </div>
       <Happier id={id} />
     </>
