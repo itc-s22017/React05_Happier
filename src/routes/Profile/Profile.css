@@ -1,3 +1,7 @@
+.container {
+    display: block;
+    flex-wrap: wrap;
+}
 .profile {
     width: 500px;
     padding-bottom: 15px;
@@ -19,4 +23,16 @@
     font-weight: bold;
     font-size: 25px;
     margin-left: 20px;
+}
+
+.follow {
+    padding:10px;
+    background-color: aliceblue;
+    width: 100%;
+}
+
+.fBtn{
+    border:1px solid #00c7fe !important;
+    width: 47% !important;
+    margin:5px !important;
 }

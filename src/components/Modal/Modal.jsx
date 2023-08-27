@@ -2,14 +2,22 @@ import React, { useEffect, useState } from 'react'
 import User from '../User/User';
 import axios from "../../utils/axios"
 
-function Modal({ showFlag, setShowModal, postId }) {
+function Modal({ showFlag, setShowModal, postId, follow, forf, content }) {
     const [users, setUsers] = useState([])
     useEffect(() => {
         const fetch = async () => {
             try {
-                const res = await axios.get(`/post/getUserfromlikes/${postId}`)
-                setUsers(res.data)
-                console.log(res.data)
+                if (postId) {
+                    const res = await axios.get(`/post/getUserfromlikes/${postId}`)
+                    setUsers(res.data)
+                } else if (follow) {
+                    const res = await axios.get(`/users/${follow}/getFollowings`)
+                    if (forf === "followings") {
+                        setUsers(res.data.followings)
+                    } else if (forf === "followers") {
+                        setUsers(res.data.followers)
+                    }
+                }
             } catch (e) {
                 console.log("erro likes user")
             }
@@ -44,16 +52,16 @@ function Modal({ showFlag, setShowModal, postId }) {
 
     const btn = {
         // margin: "auto"
-        margin:0,
-        padding:0,
-        border:"none",
-        fontSize:"20px",
-        backgroundColor:"none",
-        cursor:"pointer",
-        fontWeight:"bold",
+        margin: 0,
+        padding: 0,
+        border: "none",
+        fontSize: "20px",
+        backgroundColor: "none",
+        cursor: "pointer",
+        fontWeight: "bold",
     }
 
-    
+
     return (
         <>
             {showFlag ? (
@@ -61,9 +69,9 @@ function Modal({ showFlag, setShowModal, postId }) {
                     <div id="modalContent" style={modalContent}>
                         <button onClick={closeModal} style={btn}>☓</button>
                         {users.length !== 0 && users.map(user => (
-                            <User key={user._id} user={user} length={users.length}/>
+                            <User key={user._id} user={user} length={users.length} />
                         ))}
-                        {users.length === 0 && <p style={{fontWeight:"bold"}}>いいねしている人がいません</p>}
+                        {users.length === 0 && <p style={{ fontWeight: "bold" }}>{content ? content : "No one in there"}</p>}
                     </div>
                 </div>
             ) : (

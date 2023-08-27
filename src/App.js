@@ -9,8 +9,9 @@ import Profile from './routes/Profile/Profile';
 import Timeline from './routes/Happier/Timeline';
 import Reply from './routes/Reply/Reply';
 
-function App() {
 
+function App() {
+  
   return (
     <>
       <Header />
