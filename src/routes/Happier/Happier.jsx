@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Happier.css"
 import { useRef } from 'react'
 import { Avatar, Button } from '@mui/material'
@@ -12,6 +12,8 @@ function Happier({ id, reply }) {
   const { user } = useAuthContext()
   const [posts, setPosts] = useState([])
   const contentRef = useRef()
+  const [followingsOrAll, setFollowingsOrAll] = useState("")
+
 
   const set = (response) => setPosts(response.data.sort((post1, post2) => {
     return new Date(post2.createdAt) - new Date(post1.createdAt)
@@ -29,8 +31,24 @@ function Happier({ id, reply }) {
         setPosts([response.data])
       } else {
         //home用
-        const response = await axios.get("/post/getAll")
-        set(response)
+        switch (followingsOrAll) {
+          case "followings":
+            const response = await axios.get("/post/friendsPosts", {
+              params: {
+                userId: user._id
+              }
+            })
+            set(response)
+            break;
+          case "all":
+            const response2 = await axios.get("/post/getAll")
+            set(response2)
+            break;
+          default:
+            const def = await axios.get("/post/getAll")
+            set(def)
+            break;
+        }
       }
     } catch (e) {
       console.log(e)
@@ -39,7 +57,7 @@ function Happier({ id, reply }) {
 
   useEffect(() => {
     getPosts()
-  }, [id, reply])
+  }, [id, reply, followingsOrAll])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -63,19 +81,25 @@ function Happier({ id, reply }) {
     <>
       <LogoutIcon onClick={logout} />
       {!id && !reply && (
-        <div className="Tweet">
-          <form onSubmit={handleSubmit}>
-            <div className="Tweet--input">
-              <Avatar />
-              <input
-                type="text"
-                placeholder='身近にある小さな幸せは？'
-                ref={contentRef}
-              />
+        <>
+          <div className="Tweet">
+            <form onSubmit={handleSubmit}>
+              <div className="Tweet--input">
+                <Avatar />
+                <input
+                  type="text"
+                  placeholder='身近にある小さな幸せは？'
+                  ref={contentRef}
+                />
+              </div>
+              <Button className='tweetButton' type='submit'>投稿する</Button>
+            </form>
+            <div className="followingsOrAll">
+              <h3 className='all' onClick={(e) => setFollowingsOrAll("all")}>全体</h3>
+              <h3 className='followings' onClick={(e) => setFollowingsOrAll("followings")}>フォロー中</h3>
             </div>
-            <Button className='tweetButton' type='submit'>投稿する</Button>
-          </form>
-        </div>
+          </div>
+        </>
       )}
       {posts.map(post => (
         <Post post={post} key={post._id} />

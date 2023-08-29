@@ -9,7 +9,7 @@ import Modal from '../../components/Modal/Modal'
 
 function Profile() {
   const id = useParams().id
-  const { user, getUser } = useAuthContext()
+  const { user } = useAuthContext()
   const [currentUser, setCurrentUser] = useState({})
   const [isFollowing, setIsFollowing] = useState()
   const [fOrf, setForF] = useState("")
