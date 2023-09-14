@@ -1,0 +1,15 @@
+.ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+    margin: 30px;
+}
+
+.li {
+    color: red;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}

@@ -6,16 +6,20 @@ import Post from "../../components/Post/Post"
 import { useAuthContext } from '../../context/AuthContext'
 import LogoutIcon from '@mui/icons-material/Logout';
 import axios from "../../utils/axios"
+import Pagination from '../../components/Pagination/Pagination'
 
 function Happier({ id, reply }) {
   const { logout } = useAuthContext()
   const { user } = useAuthContext()
   const [posts, setPosts] = useState([])
   const contentRef = useRef()
-  const [followingsOrAll, setFollowingsOrAll] = useState("")
+  const [followingsOrAll, setFollowingsOrAll] = useState("all")
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalItems, setTotalItems] = useState(null)
+  const MAX_ITEMS_PER_PAGE = 3
 
 
-  const set = (response) => setPosts(response.data.sort((post1, post2) => {
+  const set = (response) => setPosts(response.data.posts.sort((post1, post2) => {
     return new Date(post2.createdAt) - new Date(post1.createdAt)
   }).filter(data => data.reply === false))
 
@@ -35,17 +39,33 @@ function Happier({ id, reply }) {
           case "followings":
             const response = await axios.get("/post/friendsPosts", {
               params: {
-                userId: user._id
+                userId: user._id,
+                skip: (currentPage - 1) * MAX_ITEMS_PER_PAGE,
+                limit: MAX_ITEMS_PER_PAGE
               }
             })
+            setTotalItems(response.data.Total)
             set(response)
+            console.log(response.data.Total)
             break;
           case "all":
-            const response2 = await axios.get("/post/getAll")
+            const response2 = await axios.get("/post/getAll", {
+              params: {
+                skip: (currentPage - 1) * MAX_ITEMS_PER_PAGE,
+                limit: MAX_ITEMS_PER_PAGE
+              }
+            })
+            setTotalItems(response2.data.Total)
             set(response2)
             break;
           default:
-            const def = await axios.get("/post/getAll")
+            const def = await axios.get("/post/getAll", {
+              params: {
+                skip: (currentPage - 1) * MAX_ITEMS_PER_PAGE,
+                limit: MAX_ITEMS_PER_PAGE
+              }
+            })
+            setTotalItems(response2.data.Total)
             set(def)
             break;
         }
@@ -57,7 +77,7 @@ function Happier({ id, reply }) {
 
   useEffect(() => {
     getPosts()
-  }, [id, reply, followingsOrAll])
+  }, [id, reply, followingsOrAll, currentPage])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -74,7 +94,10 @@ function Happier({ id, reply }) {
     } catch (e) {
       console.log(e)
     }
+  }
 
+  const handleSetValue = (newVal) => {
+    setCurrentPage(newVal)
   }
 
   return (
@@ -104,6 +127,7 @@ function Happier({ id, reply }) {
       {posts.map(post => (
         <Post post={post} key={post._id} />
       ))}
+      <Pagination MAX={totalItems} setValue={handleSetValue} itemsPerPage={MAX_ITEMS_PER_PAGE} />
     </>
 
   )
